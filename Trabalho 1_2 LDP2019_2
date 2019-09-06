@@ -1,0 +1,15 @@
+class Pessoa:
+    def __init__(self, idade, peso):
+        self.idade = idade
+        self.peso = peso
+
+
+class Populacao:
+    def __init__(self, tamanho):
+        self.tamanho = tamanho
+        self.individuos = [Pessoa(randrange(17,30), randrange(50,150)) for i in range(tamanho)]
+    def amostra(self, n):
+        pass
+
+
+pop = Populacao(100)
