@@ -1,3 +1,5 @@
+import numpy as np
+
 class Pessoa:
     def __init__(self, idade, peso):
         self.idade = idade
@@ -7,7 +9,10 @@ class Pessoa:
 class Populacao:
     def __init__(self, tamanho):
         self.tamanho = tamanho
-        self.individuos = [Pessoa(randrange(17,30), randrange(50,150)) for i in range(tamanho)]
+        med = []
+        cv = []
+        desv = cv*med
+        self.individuos = [Pessoa(np.random.normal(med, desv)), randrange(50,150)) for i in range(tamanho)]
     def amostra(self, n):
         pass
 
