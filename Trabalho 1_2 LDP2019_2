@@ -1,9 +1,14 @@
 import numpy as np
 
 class Pessoa:
-    def __init__(self, idade, peso):
+    def __init__(self, rendimento_mensal_domiciliar, rede_ensino, modalidade, sexo, cor, regiao, idade):
+        self.rendimento_mensal_domiciliar = rendimento_mensal_domiciliar
+        self.rede_ensino = rede_ensino
+        self.modalidade = modalidade
+        self.sexo = sexo
+        self.cor = cor
+        self.regiao = regiao
         self.idade = idade
-        self.peso = peso
 
 
 class Populacao:
