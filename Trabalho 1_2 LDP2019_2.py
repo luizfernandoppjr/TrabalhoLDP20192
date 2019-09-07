@@ -2,9 +2,9 @@ import numpy as np
 import random as rnd
 
 class Pessoa:
-    def __init__(self, rendimento_mensal_domiciliar):#, rede_ensino, modalidade, sexo, cor, regiao, idade):
+    def __init__(self, rendimento_mensal_domiciliar, rede_ensino):#, modalidade, sexo, cor, regiao, idade):
         self.rendimento_mensal_domiciliar = rendimento_mensal_domiciliar
-        #self.rede_ensino = rede_ensino
+        self.rede_ensino = rede_ensino
         #self.modalidade = modalidade
         #self.sexo = sexo
         #self.cor = cor
@@ -41,10 +41,33 @@ class Populacao:
                 k += 1
         
         #//rendimento mensal domiciliar per capita
+
+
+        #rede_ensino//
+
+        #Estabelece os valores e distribuição dessa categoria pelos dados da PNAD
+        self.rede_ensino_valores = [105.0, 372.0]
+        self.rede_ensino_texto = ["Pública",
+                                                    "Particular"]
+        self.rede_ensino_media = sum(self.rede_ensino_valores) / len(self.rede_ensino_valores)
+        self.rede_ensino_distrib = [x / sum(self.rede_ensino_valores) for x in self.rede_ensino_valores]
+
+        #Gera uma população numérica tomando a ditribuição dos valores da PNAD
+        gerador = list(np.random.multinomial(self.tamanho, self.rede_ensino_distrib))
+        
+        #Categoriza essa população: de número para a categoria em texto
+        rede_ensino_individuo = [0] * self.tamanho
+        k = 0
+        for j in range(len(gerador)):
+            for i in range(gerador[j]):
+                rede_ensino_individuo[k] = self.rede_ensino_texto[j]
+                k += 1
+        
+        #//rede_ensino
         
         
         #Gera a população
-        self.individuos = [Pessoa(renda_individuo[x]) for x in range(len(renda_individuo))]
+        self.individuos = [Pessoa(renda_individuo[x], rede_ensino_individuo[x]) for x in range(self.tamanho)]
 
 
     def amostra(self, n):
@@ -52,4 +75,4 @@ class Populacao:
 
 
 pop = Populacao(10)
-print(pop.individuos[1].rendimento_mensal_domiciliar)
+print(pop.individuos[1].rede_ensino)
