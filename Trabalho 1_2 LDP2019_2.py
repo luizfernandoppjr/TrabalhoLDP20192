@@ -16,9 +16,10 @@ class Populacao:
         self.tamanho = tamanho
 
         self.rendimento_mensal_domiciliar_valores = [472, 1442, 2551, 1176, 745, 496, 360]
+        self.rendimento_mensal_domiciliar_media = sum(self.rendimento_mensal_domiciliar_valores) / len(self.rendimento_mensal_domiciliar_valores)
         self.rendimento_mensal_domiciliar_distrib = [x / sum(self.rendimento_mensal_domiciliar_valores) for x in self.rendimento_mensal_domiciliar_valores]
 
-        self.individuos = [Pessoa(np.random.multinomial(self.tamanho, self.rendimento_mensal_domiciliar_distrib)) for i in range(tamanho)]
+        self.individuos = [Pessoa(np.random.multinomial(self.tamanho, self.rendimento_mensal_domiciliar_distrib) * self.rendimento_mensal_domiciliar_media)  for i in range(tamanho)]
 
 
     def amostra(self, n):
