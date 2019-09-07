@@ -132,18 +132,7 @@ class Populacao:
         #//cor
         
         #Gera a população
-        self.individuos = [Pessoa(renda_individuo[x], rede_ensino_individuo[x], modalidade[x], sexo[x], cor[x]) for x in range(self.tamanho)]
-
-
-    def amostra(self, n):
-        return rnd.sample(self.individuos, n)
-
-
-pop = Populacao(100)
-print(pop.individuos[1].sexo)
-        
-        #Gera a população
-        self.individuos = [Pessoa(renda_individuo[x], rede_ensino_individuo[x], modalidade_individuo[x]) for x in range(self.tamanho)]
+        self.individuos = [Pessoa(renda_individuo[x], rede_ensino_individuo[x], modalidade[x], sexo_individuo[x], cor_individuo[x]) for x in range(self.tamanho)]
 
 
     def amostra(self, n):
