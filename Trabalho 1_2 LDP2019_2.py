@@ -92,7 +92,7 @@ class Populacao:
                 #sexo//
 
         #Estabelece os valores e distribuição dessa categoria pelos dados da PNAD
-        self.sexo_valores = [3118.0, 233.0, 661.0, 4170.0, 339.0,1034.0]
+        self.sexo_valores = [3118.0, 4170.0]
         self.sexo_texto = ['Mulheres','Homens']
         self.sexo_media = sum(self.sexo_valores) / len(self.sexo_valores)
         self.sexo_distrib = [x / sum(self.sexo_valores) for x in self.sexo_valores]
@@ -113,7 +113,7 @@ class Populacao:
         #cor//
 
       #Estabelece os valores e distribuição dessa categoria pelos dados da PNAD
-        self.cor_valores = [4154.0,184,625,3071,381,1065]
+        self.cor_valores = [4154.0,3071]
         self.cor_texto = ['Branca','Preta ou parda']
         self.cor_media = sum(self.cor_valores) / len(self.cor_valores)
         self.cor_distrib = [x / sum(self.cor_valores) for x in self.cor_valores]
@@ -132,7 +132,7 @@ class Populacao:
         #//cor
         
         #Gera a população
-        self.individuos = [Pessoa(renda_individuo[x], rede_ensino_individuo[x], modalidade[x], sexo_individuo[x], cor_individuo[x]) for x in range(self.tamanho)]
+        self.individuos = [Pessoa(renda_individuo[x], rede_ensino_individuo[x], modalidade_individuo[x], sexo_individuo[x], cor_individuo[x]) for x in range(self.tamanho)]
 
 
     def amostra(self, n):
@@ -140,4 +140,4 @@ class Populacao:
 
 
 pop = Populacao(100)
-print(pop.individuos[1].rede_ensino)
+print(pop.individuos[1].sexo)
