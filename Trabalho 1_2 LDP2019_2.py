@@ -27,20 +27,19 @@ class Populacao:
         self.rendimento_mensal_domiciliar_media = sum(self.rendimento_mensal_domiciliar_valores) / len(self.rendimento_mensal_domiciliar_valores)
         self.rendimento_mensal_domiciliar_distrib = [x / sum(self.rendimento_mensal_domiciliar_valores) for x in self.rendimento_mensal_domiciliar_valores]
 
-
-        gerador = np.random.multinomial(100, self.rendimento_mensal_domiciliar_distrib)
+        gerador = np.random.multinomial(self.tamanho, self.rendimento_mensal_domiciliar_distrib)
         
-        renda_individuo = []
+        renda_individuo = [] * len(gerador)
         for j in range(len(gerador)):
             for i in range(len(self.rendimento_mensal_domiciliar_distrib)):
-                if gerador[j] <= sum(self.rendimento_mensal_domiciliar_distrib[0:i]):
-                    renda_individuo[j] = i
+                if gerador[j] <= sum(self.rendimento_mensal_domiciliar_distrib[0:j]):
+                    renda_individuo[j] = self.rendimento_mensal_domiciliar_texto[i]
                     break
 
         
 
 
-        self.individuos = [Pessoa(np.random.multinomial(self.tamanho, self.rendimento_mensal_domiciliar_distrib) * self.rendimento_mensal_domiciliar_media)  for i in range(tamanho)]
+        self.individuos = [Pessoa(renda_individuo[x]) for x in range(len(renda_individuo))]
 
 
     def amostra(self, n):
@@ -48,4 +47,4 @@ class Populacao:
 
 
 pop = Populacao(100)
-print(pop.amostra(10))
+print(pop.individuos)
