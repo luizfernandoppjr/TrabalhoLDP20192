@@ -30,10 +30,12 @@ class Populacao:
 
         gerador = np.random.multinomial(100, self.rendimento_mensal_domiciliar_distrib)
         
-        for i in range(len(self.rendimento_mensal_domiciliar_distrib)):
-            if gerador <= sum(self.rendimento_mensal_domiciliar_distrib[0:i]):
-                renda_individuo = i
-                break
+        renda_individuo = []
+        for j in range(len(gerador)):
+            for i in range(len(self.rendimento_mensal_domiciliar_distrib)):
+                if gerador[j] <= sum(self.rendimento_mensal_domiciliar_distrib[0:i]):
+                    renda_individuo[j] = i
+                    break
 
         
 
