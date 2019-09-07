@@ -89,7 +89,7 @@ class Populacao:
         #//modalidade
         
                 
-        #sexo//
+                #sexo//
 
         #Estabelece os valores e distribuição dessa categoria pelos dados da PNAD
         self.sexo_valores = [3118.0, 233.0, 661.0, 4170.0, 339.0,1034.0]
@@ -113,8 +113,8 @@ class Populacao:
         #cor//
 
       #Estabelece os valores e distribuição dessa categoria pelos dados da PNAD
-        self.cor_valores = [3118.0, 233.0, 661.0, 4170.0, 339.0,1034.0]
-        self.cor_texto = ['Mulheres','Homens']
+        self.cor_valores = [4154.0,184,625,3071,381,1065]
+        self.cor_texto = ['Branca','Preta ou parda']
         self.cor_media = sum(self.cor_valores) / len(self.cor_valores)
         self.cor_distrib = [x / sum(self.cor_valores) for x in self.cor_valores]
 
@@ -139,5 +139,5 @@ class Populacao:
         return rnd.sample(self.individuos, n)
 
 
-pop = Populacao(10)
+pop = Populacao(100)
 print(pop.individuos[1].rede_ensino)
