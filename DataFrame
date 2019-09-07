@@ -1,0 +1,37 @@
+#def ler arquivo
+def ler_arquivo ():
+
+    list_df = list()
+    
+    #Usando o pip install panda_ods_reader
+    from pandas_ods_reader import read_ods
+
+    #path = nome do arquivo
+    path = "pnad_2014_educacao_profissional.ods"
+
+    #comando para ler todos os sheets do arquivo (tem 125 sheets, se colocar mais que isso o código da erro)
+    for i in range(0,125):
+        sheet_idx = i
+        i+=1
+        
+        #retorno o arquivo
+        df = read_ods(path, sheet_idx)
+        list_df.append(df)
+    
+    print(len(list_df))
+    return list_df
+
+#testando quantos sheets o arquivo tem
+output = ler_arquivo()
+
+# import pandas as pd
+import pandas as pd
+ 
+# list of strings
+data = output[3]
+
+# Calling DataFrame constructor on list
+df = pd.DataFrame(data)
+lista = df.values.tolist()
+lista
+
