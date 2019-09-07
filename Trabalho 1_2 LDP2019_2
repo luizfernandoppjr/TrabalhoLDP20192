@@ -1,25 +1,29 @@
 import numpy as np
+import random as rnd
 
 class Pessoa:
-    def __init__(self, rendimento_mensal_domiciliar, rede_ensino, modalidade, sexo, cor, regiao, idade):
+    def __init__(self, rendimento_mensal_domiciliar):#, rede_ensino, modalidade, sexo, cor, regiao, idade):
         self.rendimento_mensal_domiciliar = rendimento_mensal_domiciliar
-        self.rede_ensino = rede_ensino
-        self.modalidade = modalidade
-        self.sexo = sexo
-        self.cor = cor
-        self.regiao = regiao
-        self.idade = idade
-
+        #self.rede_ensino = rede_ensino
+        #self.modalidade = modalidade
+        #self.sexo = sexo
+        #self.cor = cor
+        #self.regiao = regiao
+        #self.idade = idade
 
 class Populacao:
     def __init__(self, tamanho):
         self.tamanho = tamanho
-        med = []
-        cv = []
-        desv = cv*med
-        self.individuos = [Pessoa(np.random.normal(med, desv)), randrange(50,150)) for i in range(tamanho)]
+
+        self.rendimento_mensal_domiciliar_valores = [472, 1442, 2551, 1176, 745, 496, 360]
+        self.rendimento_mensal_domiciliar_distrib = [x / sum(self.rendimento_mensal_domiciliar_valores) for x in self.rendimento_mensal_domiciliar_valores]
+
+        self.individuos = [Pessoa(np.random.multinomial(self.tamanho, self.rendimento_mensal_domiciliar_distrib)) for i in range(tamanho)]
+
+
     def amostra(self, n):
-        pass
+        return rnd.sample(self.individuos, n)
 
 
 pop = Populacao(100)
+print(pop.amostra(10))
