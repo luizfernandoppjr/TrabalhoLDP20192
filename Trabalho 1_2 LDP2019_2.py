@@ -2,12 +2,12 @@ import numpy as np
 import random as rnd
 
 class Pessoa:
-    def __init__(self, rendimento_mensal_domiciliar, rede_ensino, modalidade):#, sexo, cor, regiao, idade):
+    def __init__(self, rendimento_mensal_domiciliar, rede_ensino, modalidade,sexo,cor):#regiao, idade):
         self.rendimento_mensal_domiciliar = rendimento_mensal_domiciliar
         self.rede_ensino = rede_ensino
         self.modalidade = modalidade
-        #self.sexo = sexo
-        #self.cor = cor
+        self.sexo = sexo
+        self.cor = cor
         #self.regiao = regiao
         #self.idade = idade
 
@@ -88,6 +88,59 @@ class Populacao:
         
         #//modalidade
         
+                
+        #sexo//
+
+        #Estabelece os valores e distribuição dessa categoria pelos dados da PNAD
+        self.sexo_valores = [3118.0, 233.0, 661.0, 4170.0, 339.0,1034.0]
+        self.sexo_texto = ['Mulheres','Homens']
+        self.sexo_media = sum(self.sexo_valores) / len(self.sexo_valores)
+        self.sexo_distrib = [x / sum(self.sexo_valores) for x in self.sexo_valores]
+
+        #Gera uma população numérica tomando a ditribuição dos valores da PNAD
+        gerador = list(np.random.multinomial(self.tamanho, self.sexo_distrib))
+        
+        #Categoriza essa população: de número para a categoria em texto
+        sexo_individuo = [0] * self.tamanho
+        k = 0
+        for j in range(len(gerador)):
+            for i in range(gerador[j]):
+                sexo_individuo[k] = self.sexo_texto[j]
+                k += 1
+        
+        #//sexo
+                
+        #cor//
+
+      #Estabelece os valores e distribuição dessa categoria pelos dados da PNAD
+        self.cor_valores = [3118.0, 233.0, 661.0, 4170.0, 339.0,1034.0]
+        self.cor_texto = ['Mulheres','Homens']
+        self.cor_media = sum(self.cor_valores) / len(self.cor_valores)
+        self.cor_distrib = [x / sum(self.cor_valores) for x in self.cor_valores]
+
+        #Gera uma população numérica tomando a ditribuição dos valores da PNAD
+        gerador = list(np.random.multinomial(self.tamanho, self.cor_distrib))
+        
+        #Categoriza essa população: de número para a categoria em texto
+        cor_individuo = [0] * self.tamanho
+        k = 0
+        for j in range(len(gerador)):
+            for i in range(gerador[j]):
+                cor_individuo[k] = self.cor_texto[j]
+                k += 1
+        
+        #//cor
+        
+        #Gera a população
+        self.individuos = [Pessoa(renda_individuo[x], rede_ensino_individuo[x], modalidade[x], sexo[x], cor[x]) for x in range(self.tamanho)]
+
+
+    def amostra(self, n):
+        return rnd.sample(self.individuos, n)
+
+
+pop = Populacao(100)
+print(pop.individuos[1].sexo)
         
         #Gera a população
         self.individuos = [Pessoa(renda_individuo[x], rede_ensino_individuo[x], modalidade_individuo[x]) for x in range(self.tamanho)]
